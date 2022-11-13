@@ -1,9 +1,22 @@
 <template>
-  <b-navbar type="light" variant="light">
-    <b-nav-form>
-      <b-form-input class="mr-sm-2" placeholder="Search" v-model="filter" :disabled="!getItemsLength"></b-form-input>
-      <button-create-contact v-if="getItemsLength" @create-contact="$emit('nav-create-contact')" />
-    </b-nav-form>
+  <b-navbar>
+    <b-img :src="require('@/assets/ic-logo.png')" fluid alt=""></b-img>
+    <b-navbar-nav class="ml-auto">
+      <b-nav-form class="nav-form-search">
+        <button-create-contact
+          v-if="getItemsLength"
+          class="mr-4"
+          @create-contact="$emit('nav-create-contact')"
+        />
+        <b-form-input
+          class="d-sm-none d-md-block"
+          placeholder="Buscar..."
+          size="sm"
+          v-model="filter"
+          :disabled="!getItemsLength"
+        ></b-form-input>
+      </b-nav-form>
+    </b-navbar-nav>
   </b-navbar>
 </template>
 
@@ -38,7 +51,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

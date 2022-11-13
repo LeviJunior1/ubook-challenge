@@ -1,16 +1,21 @@
 <template>
-  <div>
+  <b-container fluid>
     <b-table
       v-if="getItemsLength"
       hover
       show-empty
+      responsive
+      class="table-contact"
       :items="getItems"
       :fields="fields"
       :filter="getFilter"
     >
+      <template #emptyfiltered>
+        Nenhum resultado encontrado.
+      </template>
       <template #cell(name)="data">
         <span>
-          <b-avatar size="sm" :text="avatarLetter(data.item)" :variant="randomColor()"></b-avatar>
+          <b-avatar size="sm" :text="avatarLetter(data.item)" variant="primary"></b-avatar>
         </span> {{ data.item.name }}
       </template>
       <template #cell(actions)="row">
@@ -18,7 +23,7 @@
           <b-button size="sm" variant="light" @click="showModaContact(row.item)" class="mr-1">
             <b-icon icon="pencil" aria-hidden="true"></b-icon>
           </b-button>
-          <b-button size="sm" variant="light" @click="showModalRemoveContact(row.item.name)">
+          <b-button size="sm" variant="light" @click="showModalRemoveContact(row.item.id)">
             <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
           </b-button>
         </div>
@@ -26,13 +31,13 @@
     </b-table>
     <empty-table-contact 
       v-else
+      class="empty-contact"
       @create-contact="showModaContact"
     />
     
     <modal-remove-contact @modal-remove-contact="removeContact" :name="itemRemove"/>
     <modal-create-edit-contact @modal-contact="createAndEditContact" :edit="edit" :editForm="itemEdit"/>
-
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -86,8 +91,8 @@ export default {
       'addItem',
       'editItem'
     ]),
-    removeContact(name) {
-      this.removeItem(name)
+    removeContact(id) {
+      this.removeItem(id)
       this.itemRemove = null
     },
     createAndEditContact(form, edit) {
@@ -98,11 +103,6 @@ export default {
     avatarLetter(item) {
       return item?.name ? item.name.split('')[0] : 'u'
     },
-    randomColor() {
-      const colors = ['secondary', 'primary', 'dark', 'light', 'success', 'danger', 'warning', 'info']
-      const number = Math.floor(Math.random() * colors.length)
-      return colors[number] || colors[0]
-    },
     showModaContact(item = null) {
       if(item) {
         this.edit = true
@@ -110,14 +110,21 @@ export default {
       }
       this.$root.$emit('bv::show::modal', 'modal-contact')
     },
-    showModalRemoveContact(item) {
+    showModalRemoveContact(id) {
       this.$root.$emit('bv::show::modal', 'modal-remove-contact')
-      this.itemRemove = item
+      this.itemRemove = id
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .empty-contact {
+    margin-top: 7rem;
+  }
 
+  .table-contact {
+    margin-top: 2rem;
+    background-color: $white-two;
+  }
 </style>

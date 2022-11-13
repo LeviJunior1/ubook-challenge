@@ -1,8 +1,8 @@
 <template>
-  <b-container fluid id="app">
+  <div id="app">
     <navbar @nav-create-contact="createAndEditContact"/>
     <list-contact />
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -23,12 +23,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
   body {
     margin: 0;
   }
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    height: 100vh;
+
+    background-color: $background-default;
   }
 </style>

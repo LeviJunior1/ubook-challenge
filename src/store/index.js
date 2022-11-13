@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { generateId } from '../utils/generateId'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -22,19 +24,23 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    REMOVE_ITEM(state, name) {
-      let newList = state.items.filter(value => value.name != name)
+    REMOVE_ITEM(state, id) {
+      let newList = state.items.filter(value => value.id != id)
       state.items = newList
     },
 
     ADD_ITEM(state, item) {
+      let newItem = item
+      newItem.id = generateId()
+
       let newList = [...state.items]
-      newList.push(item)
+      newList.push(newItem)
+
       state.items = newList
     },
 
     EDIT_ITEM(state, item) {
-      let newList = state.items.filter(value => value.name != item.name)
+      let newList = state.items.filter(value => value.id != item.id)
       newList.push(item)
       state.items = newList
     },
@@ -44,8 +50,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    removeItem({ commit }, name) {
-      commit('REMOVE_ITEM', name)
+    removeItem({ commit }, id) {
+      commit('REMOVE_ITEM', id)
     },
 
     addItem({ commit }, item) {
@@ -59,11 +65,6 @@ export default new Vuex.Store({
     filterItem({ commit }, filter) {
       commit('FILTER_ITEM', filter)
     },
-
-    openModalCreateContact({ commit }) {
-      commit('OPEN_MODAL_CREATE_CONTACT')
-    }
   },
-  modules: {
-  }
+  modules: {}
 })

@@ -1,43 +1,70 @@
 <template>
-  <b-modal id="modal-contact"
+  <b-modal
+    id="modal-contact"
     hide-footer
+    centered
     @hidden="resetModal"
-    :title="edit ? 'Editar contato' : 'Criar novo contato'"
   >
+    <template #modal-header>
+      <h5 class="modal-title text-style-1">{{ edit ? 'Editar contato' : 'Criar novo contato' }}</h5>
+    </template>
     <form ref="form" 
       @submit.stop.prevent
     >
-      <b-form-group
-        label="Nome"
-        label-for="name"
-      >
-        <b-form-input
-          id="name"
-          v-model="form.name"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="E-mail"
-        label-for="email"
-      >
-        <b-form-input
-          id="email"
-          v-model="form.email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="Telefone"
-        label-for="cellphone"
-      >
-        <b-form-input
-          id="cellphone"
-          v-model="form.cellphone"
-        ></b-form-input>
-      </b-form-group>
+      <b-row>
+        <b-col cols="12">
+          <b-form-group
+            label="Nome"
+            label-for="name"
+            class="text-style-1"
+          >
+            <b-form-input
+              id="name"
+              v-model="form.name"
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="12">
+          <b-form-group
+            label="E-mail"
+            label-for="email"
+            class="text-style-1"
+          >
+            <b-form-input
+              id="email"
+              v-model="form.email"
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="6">
+          <b-form-group
+            label="Telefone"
+            label-for="cellphone"
+            class="text-style-1"
+          >
+            <b-form-input
+              id="cellphone"
+              v-model="form.cellphone"
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
     </form>
-    <div>
-      <b-button class="mt-3" block @click="$bvModal.hide('modal-contact')">Cancelar</b-button>
-      <b-button class="mt-3" block @click="$bvModal.hide('modal-contact'), $emit('modal-contact', form, edit)">Salvar</b-button>
+    <div class="d-flex justify-content-end">
+      <b-button
+        pill
+        class="btn-cancel"
+        @click="$bvModal.hide('modal-contact')"
+      >
+        Cancelar
+      </b-button>
+      <b-button
+        pill
+        class="btn-confirm"
+        @click="$bvModal.hide('modal-contact'), $emit('modal-contact', form, edit)"
+      >
+        Salvar
+      </b-button>
     </div>
   </b-modal>
 </template>
@@ -77,6 +104,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  header {
+    line-height: 0;
+    margin: auto 0.125rem;
+  }
 
+  .text-style-1 {
+    font-size: 0.825rem;
+  }
 </style>
