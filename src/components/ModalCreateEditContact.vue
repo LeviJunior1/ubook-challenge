@@ -106,6 +106,7 @@ export default {
   methods: {
     resetModal() {  
       Object.assign(this.$data, this.$options.data())
+      this.$emit('reset-contact')
     }
   }
 }

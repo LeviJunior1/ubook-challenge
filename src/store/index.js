@@ -31,6 +31,8 @@ export default new Vuex.Store({
       let newItem = item
       newItem.id = `${Date.now()}`
 
+      newItem._rowVariant = 'danger'
+
       let newList = [...state.items]
       newList.push(newItem)
 
@@ -38,7 +40,6 @@ export default new Vuex.Store({
     },
 
     EDIT_ITEM(state, item) {
-      if(!item.id) item.id = `${Date.now()}`
       let newList = state.items.filter(value => value.id != item.id)
       newList.push(item)
       state.items = newList

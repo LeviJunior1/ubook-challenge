@@ -36,10 +36,15 @@
       class="empty-contact"
       @create-contact="showModaContact"
     />
-    
-    <modal-remove-contact @modal-remove-contact="removeContact" :name="itemRemove"/>
+
+    <modal-remove-contact
+      @modal-remove-contact="removeContact"
+      :name="itemRemove"
+    />
+
     <modal-create-edit-contact
       @modal-contact="createAndEditContact"
+      @reset-contact="resetContact"
       :edit="edit"
       :editForm="itemEdit"
     />
@@ -85,7 +90,10 @@ export default {
         key: 'cellphone',
         label: 'Telefone'
       },
-      { key: 'actions', label: '' }
+      {
+        key: 'actions',
+        label: ''
+      }
     ],
     itemRemove: null,
     itemEdit: null,
@@ -103,6 +111,15 @@ export default {
     },
     createAndEditContact(form, edit) {
       edit ? this.editItem(form) : this.addItem(form)
+      this.resetContact()
+      if(!edit) {
+        setTimeout(() => {
+          const tr = document.querySelector('.table-danger')
+          tr.classList.remove('table-danger')
+        }, 10000)
+      }
+    },
+    resetContact() {
       this.edit = false
       this.itemEdit = null
     },
@@ -132,6 +149,10 @@ export default {
   .table-contact {
     margin-top: 2rem;
     background-color: $white-two;
+  }
+
+  ::v-deep .table-hover tbody tr:hover {
+    background-color: $very-light-pink;
   }
 
   .btn-light,
