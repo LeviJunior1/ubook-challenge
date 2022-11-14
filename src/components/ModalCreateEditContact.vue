@@ -61,6 +61,7 @@
       <b-button
         pill
         class="btn-confirm"
+        :disabled="!checkFormValue"
         @click="$bvModal.hide('modal-contact'), $emit('modal-contact', form, edit)"
       >
         Salvar
@@ -82,13 +83,6 @@ export default {
       default: null
     }
   },
-  watch: {
-    editForm() {
-      if(this.editForm) {
-        this.form = this.editForm
-      }
-    }
-  },
   data: () => ({
     form: {
       name: '',
@@ -96,6 +90,19 @@ export default {
       cellphone: ''
     },
   }),
+  watch: {
+    editForm() {
+      if(this.editForm) {
+        this.form = this.editForm
+      }
+    }
+  },
+  computed: {
+    checkFormValue() {
+      let valid = this.form.name || this.form.email || this.form.cellphone
+      return valid
+    }
+  },
   methods: {
     resetModal() {  
       Object.assign(this.$data, this.$options.data())
@@ -112,5 +119,12 @@ export default {
 
   .text-style-1 {
     font-size: 0.825rem;
+  }
+
+  .btn-secondary.disabled, .btn-secondary:disabled {
+    background-color: $red-light;
+    color: $white-two;
+    border-color: transparent;
+    opacity: 0.32;
   }
 </style>

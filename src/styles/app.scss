@@ -65,4 +65,10 @@ $background-default: #f8f9fd;
   background-color: $red-light;
   color: $white-two;
   border-color: transparent;
+
+  &:hover {
+    background-color: $red-light;
+    color: $white-two;
+    border-color: transparent;
+  }
 }

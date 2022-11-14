@@ -34,5 +34,6 @@ export default {
     height: 100vh;
 
     background-color: $background-default;
+    font-family: Roboto, sans-serif;
   }
 </style>

@@ -1,23 +1,28 @@
 <template>
-  <b-navbar>
-    <b-img :src="require('@/assets/ic-logo.png')" fluid alt=""></b-img>
-    <b-navbar-nav class="ml-auto">
-      <b-nav-form class="nav-form-search">
-        <button-create-contact
-          v-if="getItemsLength"
-          class="mr-4"
-          @create-contact="$emit('nav-create-contact')"
-        />
-        <b-form-input
-          class="d-sm-none d-md-block"
-          placeholder="Buscar..."
-          size="sm"
-          v-model="filter"
-          :disabled="!getItemsLength"
-        ></b-form-input>
-      </b-nav-form>
-    </b-navbar-nav>
-  </b-navbar>
+  <nav>
+    <b-container fluid>
+      <b-row class="pt-2">
+        <b-col cols="6" md="2">
+          <b-img :src="require('@/assets/ic-logo.png')" fluid alt=""></b-img>
+        </b-col>
+        <b-col cols="12" md="2" class="d-flex justify-content-end p-0">
+          <button-create-contact
+            v-if="getItemsLength"
+            class="mr-1"
+            @create-contact="$emit('nav-create-contact')"
+          />
+        </b-col>
+        <b-col cols="12" md="8">
+          <b-form-input
+            placeholder="Buscar..."
+            size="sm"
+            v-model="filter"
+            :disabled="!getItemsLength"
+          ></b-form-input>
+        </b-col>
+      </b-row>
+    </b-container>
+  </nav>
 </template>
 
 <script>

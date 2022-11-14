@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { generateId } from '../utils/generateId'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -31,7 +29,7 @@ export default new Vuex.Store({
 
     ADD_ITEM(state, item) {
       let newItem = item
-      newItem.id = generateId()
+      newItem.id = `${Date.now()}`
 
       let newList = [...state.items]
       newList.push(newItem)
@@ -40,6 +38,7 @@ export default new Vuex.Store({
     },
 
     EDIT_ITEM(state, item) {
+      if(!item.id) item.id = `${Date.now()}`
       let newList = state.items.filter(value => value.id != item.id)
       newList.push(item)
       state.items = newList

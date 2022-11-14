@@ -1,5 +1,5 @@
 <template>
-  <b-button pill class="text-style-3" @click.prevent.stop="$emit('create-contact')">
+  <b-button pill class="text-style-3 px-4" @click.prevent.stop="$emit('create-contact')">
     <span>
       <b-icon icon="plus"></b-icon>
     </span> Criar contato
@@ -18,6 +18,7 @@ export default {
     color: $red-light;
     border-color: none;
     border: none;
+    font-weight: 500;
     
     &:hover,
     &:active,

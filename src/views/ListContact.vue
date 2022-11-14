@@ -11,7 +11,9 @@
       :filter="getFilter"
     >
       <template #emptyfiltered>
-        Nenhum resultado encontrado.
+        <div class="text-center">
+          Nenhum resultado encontrado.
+        </div>
       </template>
       <template #cell(name)="data">
         <span>
@@ -36,7 +38,11 @@
     />
     
     <modal-remove-contact @modal-remove-contact="removeContact" :name="itemRemove"/>
-    <modal-create-edit-contact @modal-contact="createAndEditContact" :edit="edit" :editForm="itemEdit"/>
+    <modal-create-edit-contact
+      @modal-contact="createAndEditContact"
+      :edit="edit"
+      :editForm="itemEdit"
+    />
   </b-container>
 </template>
 
@@ -126,5 +132,13 @@ export default {
   .table-contact {
     margin-top: 2rem;
     background-color: $white-two;
+  }
+
+  .btn-light,
+  .btn-light:focus,
+  .btn-light:hover {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
   }
 </style>
