@@ -93,7 +93,7 @@ export default {
   watch: {
     editForm() {
       if(this.editForm) {
-        this.form = this.editForm
+        this.form = { ...this.editForm }
       }
     }
   },
